@@ -1,0 +1,7 @@
+{
+  "uuid": "mini-streaks-focus@komma.dev",
+  "name": "Mini Streaks focus helper",
+  "description": "Lets Mini Streaks see which app is focused so it can count your streak minutes. Shares only the focused app's name and window title, only with apps on your own session.",
+  "shell-version": ["45", "46", "47", "48", "49", "50", "51"],
+  "version": 1
+}
