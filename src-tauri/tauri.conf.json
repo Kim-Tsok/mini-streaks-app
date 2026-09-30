@@ -5,9 +5,9 @@
   "version": "0.2.0",
   "identifier": "com.komma.mini-streaks",
   "build": {
-    "beforeDevCommand": "corepack pnpm@11.24.0 dev",
+    "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "corepack pnpm@11.24.0 build",
+    "beforeBuildCommand": "pnpm build",
     "frontendDist": "../dist"
   },
   "app": {

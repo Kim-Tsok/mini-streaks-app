@@ -28,13 +28,27 @@ The GNOME helper lives in `src-tauri/gnome-extension/`. It exposes the focused a
 ## Develop
 
 ```sh
-corepack pnpm@11.24.0 install
-corepack pnpm@11.24.0 tauri dev      # the real app
-corepack pnpm@11.24.0 dev            # UI only, in a browser, with a mock backend and sample data
-cd src-tauri && cargo test           # streak math, migrations, matching, settings
+pnpm install
+pnpm tauri dev                          # the real app
+pnpm dev                                # UI only, in a browser, with a mock backend and sample data
+cd src-tauri && cargo test              # streak math, migrations, matching, settings
+cd src-tauri && cargo run --example probe -- 30   # print what the tracker sees for 30 s
 ```
 
 `pnpm dev` without Tauri uses `src/lib/mock.ts`, which stores sample streaks in `localStorage` and fakes a focused app so you can watch the flame fill.
+
+## Build installers
+
+- **This machine (Linux):** `pnpm tauri build` produces `.deb`, `.rpm` and `.AppImage` in `src-tauri/target/release/bundle/`.
+- **All platforms:** push a version tag and GitHub Actions builds Windows (`.exe`, `.msi`), macOS (Apple silicon and Intel `.dmg`) and Linux on their own runners. The installers land in a draft GitHub Release. Publish it, and the website's download buttons pick it up.
+
+  ```sh
+  git tag v0.2.0 && git push origin v0.2.0
+  ```
+
+  The run can also be started by hand from the Actions tab (*Build → Run workflow*). Before tagging a new version, bump `version` in `src-tauri/tauri.conf.json`.
+
+Builds are unsigned, so Windows SmartScreen and macOS Gatekeeper warn on first launch. Code signing needs an Apple Developer ID and a Windows certificate, both added later as repo secrets.
 
 ## How it fits together
 
